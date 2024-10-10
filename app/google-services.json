@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "711240749365",
+    "project_id": "bhaishare-e811a",
+    "storage_bucket": "bhaishare-e811a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711240749365:android:8f2d8ecf5ab3be88383c7c",
+        "android_client_info": {
+          "package_name": "com.example.bhaishare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHOwEs431u0Xg78pGt48Hf0qW58bpx2rk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
