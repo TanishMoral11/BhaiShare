@@ -4,11 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Button
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -24,8 +20,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        db = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+
+        // If the user is not logged in, redirect to LoginActivity
+        if (auth.currentUser == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        db = FirebaseFirestore.getInstance()
 
         val createRoomButton = findViewById<Button>(R.id.createRoomButton)
         val roomList = findViewById<RecyclerView>(R.id.roomList)
@@ -36,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
         roomList.layoutManager = LinearLayoutManager(this)
         roomAdapter = RoomAdapter { roomId ->
-            // Open RoomActivity when a room is clicked
             val intent = Intent(this, RoomActivity::class.java)
             intent.putExtra("roomId", roomId)
             startActivity(intent)
@@ -65,7 +69,6 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    // Use a snapshot listener for real-time updates
     private fun loadRooms() {
         db.collection("rooms").addSnapshotListener { snapshots, e ->
             if (e != null) {
